@@ -1,56 +1,67 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Internet Usage Quiz</title>
+    <title>Internet Usage Quiz - Quiz</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-    <h1 id="quizTitle">Quiz</h1>
+    <h1 id="quizTitle">Quiz Title</h1>
 
     <div class="question-container">
-        <div class="question" id="questionText"></div>
-        <ul class="options" id="optionsList"></ul>
-        <textarea id="answerField" rows="4" cols="50" style="display: none;"></textarea>
-        <button id="nextButton" class="next-button">Submit</button>
-        <div class="result" id="resultText"></div>
+        <p class="question" id="questionText">Question will appear here</p>
+        <ul class="options" id="optionsList">
+            <!-- Options will be populated here -->
+        </ul>
+        <!-- Answer field for open-ended questions -->
+        <input type="text" id="answerField" style="display:none;" placeholder="Type your answer here">
+        <!-- Result Text -->
+        <p id="resultText"></p>
     </div>
 
-    <!-- Include the quizData.js file -->
+    <button class="next-button" id="nextButton">Next</button>
+
+    <!-- Include quizData.js before your main script -->
     <script src="quizData.js"></script>
 
+    <!-- Your main script -->
     <script>
         // Wait for the quizData to be loaded
-        window.onload = function() {
+        document.addEventListener('DOMContentLoaded', function() {
             // Get URL parameters
             const urlParams = new URLSearchParams(window.location.search);
             const subject = urlParams.get('subject');
             const level = urlParams.get('level');
 
-            document.getElementById('quizTitle').textContent = `${subject} - ${level} Level`;
+            document.getElementById('quizTitle').textContent = subject + ' - ' + level + ' Level';
 
             // Access the quizData
             let questions = quizData[subject][level];
 
             // Retrieve asked questions from localStorage or initialize
-            let askedQuestionsKey = `${subject}_${level}_askedQuestions`;
+            let askedQuestionsKey = subject + '_' + level + '_askedQuestions';
             let askedQuestions = JSON.parse(localStorage.getItem(askedQuestionsKey)) || [];
 
-            // Filter out asked questions
-            let remainingQuestions = questions.filter((q, index) => !askedQuestions.includes(index));
+            // Build array of remaining questions with their indices
+            let remainingQuestions = [];
+            questions.forEach((q, index) => {
+                if (!askedQuestions.includes(index)) {
+                    remainingQuestions.push({ question: q, index: index });
+                }
+            });
 
             // If all questions have been asked, reset askedQuestions
             if (remainingQuestions.length === 0) {
                 // All questions have been asked
                 alert('You have answered all questions for this subject and level. The questions will now reset.');
                 askedQuestions = [];
-                remainingQuestions = questions.slice();
+                remainingQuestions = questions.map((q, index) => ({ question: q, index: index }));
             }
 
             // Select a random question from remaining questions
             let randomIndex = Math.floor(Math.random() * remainingQuestions.length);
-            let questionObj = remainingQuestions[randomIndex];
-            let currentQuestionIndex = questions.indexOf(questionObj);
+            let questionObj = remainingQuestions[randomIndex].question;
+            let currentQuestionIndex = remainingQuestions[randomIndex].index;
 
             function showQuestion() {
                 document.getElementById('questionText').textContent = questionObj.question;
@@ -65,12 +76,17 @@
                     const options = questionObj.type === 'multiple-choice' ? questionObj.options : ['True', 'False'];
                     options.forEach(option => {
                         const optionItem = document.createElement('li');
+
+                        const optionLabel = document.createElement('label');
                         const optionInput = document.createElement('input');
                         optionInput.type = 'radio';
                         optionInput.name = 'option';
                         optionInput.value = option;
-                        optionItem.appendChild(optionInput);
-                        optionItem.appendChild(document.createTextNode(' ' + option));
+
+                        optionLabel.appendChild(optionInput);
+                        optionLabel.appendChild(document.createTextNode(' ' + option));
+
+                        optionItem.appendChild(optionLabel);
                         optionsList.appendChild(optionItem);
                     });
                 } else if (questionObj.type === 'open-ended') {
@@ -81,7 +97,7 @@
                 document.getElementById('nextButton').textContent = 'Submit';
             }
 
-            document.getElementById('nextButton').addEventListener('click', function handleNextButton() {
+            function handleNextButton() {
                 let selectedAnswer;
 
                 // Check if answer is provided
@@ -111,13 +127,13 @@
                 // Check the answer and provide feedback
                 const resultText = document.getElementById('resultText');
                 if (questionObj.type === 'open-ended') {
-                    resultText.textContent = `Your answer: ${selectedAnswer}\nExpected answer: ${questionObj.answer}`;
+                    resultText.textContent = 'Your answer: ' + selectedAnswer + '\nExpected answer: ' + questionObj.answer;
                     resultText.classList.remove('incorrect');
-                } else if (selectedAnswer === questionObj.answer) {
+                } else if (selectedAnswer.toLowerCase() === questionObj.answer.toLowerCase()) {
                     resultText.textContent = 'Correct!';
                     resultText.classList.remove('incorrect');
                 } else {
-                    resultText.textContent = `Incorrect. The correct answer is: ${questionObj.answer}`;
+                    resultText.textContent = 'Incorrect. The correct answer is: ' + questionObj.answer;
                     resultText.classList.add('incorrect');
                 }
 
@@ -136,7 +152,7 @@
                     // Redirect to index.html
                     window.location.href = 'index.html';
                 });
-            });
+            }
 
             function disableInputs() {
                 const options = document.getElementsByName('option');
@@ -144,9 +160,12 @@
                 document.getElementById('answerField').disabled = true;
             }
 
+            // Attach event listener
+            document.getElementById('nextButton').addEventListener('click', handleNextButton);
+
             // Start the quiz
             showQuestion();
-        };
+        });
     </script>
 
 </body>

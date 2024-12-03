@@ -5,35 +5,36 @@ document.addEventListener('DOMContentLoaded', () => {
     const categories = [
         {
             name: 'Social Media Usage',
-            color: '#D02F37',  // ROUGE
+            color: '#D02F37',
             url: 'levels.html?subject=Social%20Media%20Usage&color=D02F37'
         },
         {
-            name: 'Online Privacy',
-            color: '#67B8CA',  // BLEU
-            url: 'levels.html?subject=Online%20Privacy&color=67B8CA'
+            name: 'Ethics and Safety',
+            color: '#67B8CA',
+            url: 'levels.html?subject=Ethics%20and%20Safety&color=67B8CA'
         },
         {
             name: 'Cybersecurity',
-            color: '#4A9E4B',  // VERT
+            color: '#4A9E4B',
             url: 'levels.html?subject=Cybersecurity&color=4A9E4B'
         },
         {
-            name: 'Internet History',
-            color: '#F9DE52',  // JAUNE
-            url: 'levels.html?subject=Internet%20History&color=F9DE52'
+            name: 'Search Engines',
+            color: '#F9DE52',
+            url: 'levels.html?subject=Search%20Engines&color=F9DE52'
         },
         {
-            name: 'E-commerce',
-            color: '#E9B54F',  // ORANGE
-            url: 'levels.html?subject=E-commerce&color=E9B54F'
+            name: 'Digital Tools',
+            color: '#E9B54F',
+            url: 'levels.html?subject=Digital%20Tools&color=E9B54F'
         },
         {
-            name: 'Internet Technologies',
-            color: '#1F4986',  // BLEU FONCE
-            url: 'levels.html?subject=Internet%20Technologies&color=1F4986'
+            name: 'Content Creation',
+            color: '#1F4986',
+            url: 'levels.html?subject=Content%20Creation&color=1F4986'
         }
     ];
+    
 
     rollButton.addEventListener('click', rollDice);
 

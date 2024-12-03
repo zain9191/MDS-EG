@@ -1,57 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Winter+Lemon&display=swap');
+
+
 /* General Styles */
 body {
     font-family: Arial, sans-serif;
     text-align: center;
-    padding: 20px; /* Added padding for the quiz page */
+    padding: 20px;
+    margin: 0;
+    font-size: 12px;
+    background-image: url('mobilebg.png'); /* Apply mobile background image */
+    background-size: cover;
+    background-position: center;
+    font-family: 'Winter Lemon';
+
 }
+
 a {
     text-decoration: none;
+}
+
+h1 {
+    font-size: 1.2em;
 }
 
 /* Subject Page Styles */
 .subject-container {
     display: flex;
+    flex-direction: column; 
+    align-items: center; 
     justify-content: center;
-    flex-wrap: wrap;
-    margin-top: 50px;
+    gap: 15px; 
+    margin: 20px auto;
 }
+
 .subject {
-    width: 150px;
-    height: 150px;
-    margin: 20px;
-    line-height: 150px;
-    color: #fff;
-    font-size: 18px;
+    width: 90%; /* Slightly reduce width for better spacing */
+    padding: 15px;
+    font-size: 1em;
+    border: 1px solid #ddd; /* Subtle border for structure */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Adds a shadow for depth */
+    background-color: #f9f9f9; /* Light background for readability */
+    color: #333; /* Adjusted text color for better contrast */
     cursor: pointer;
     border-radius: 10px;
     transition: transform 0.2s;
 }
+
 .subject:hover {
-    transform: scale(1.05);
-}
-/* Restart Game Button Styles */
-.restart-button {
-    margin-top: 30px;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
+    transform: scale(1.02);
 }
 
 /* Level Page Styles */
 .level-container {
     display: flex;
+    flex-direction: column; 
+    align-items: center; 
     justify-content: center;
-    margin-top: 100px;
+    gap: 15px; 
+    margin: 20px auto;
 }
+
 .level {
-    width: 150px;
-    height: 150px;
-    margin: 20px;
-    line-height: 150px;
-    color: #fff;
-    font-size: 18px;
+    width: 90%;
+    padding: 15px;
+    font-size: 1em;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+    color: #333;
     cursor: pointer;
     border-radius: 10px;
+}
+
+.level:hover {
+    transform: scale(1.02);
+}
+
+/* Restart Game Button Styles */
+.restart-button {
+    margin-top: 30px;
+    padding: 1em 2em;
+    font-size: 1em;
+    cursor: pointer;
+    max-width: 150px;
 }
 
 /* Quiz Page Styles */
@@ -59,40 +90,48 @@ a {
     max-width: 600px;
     margin: 0 auto;
     text-align: left;
+    padding: 20px;
 }
+
 .question {
-    font-size: 20px;
+    font-size: 1.2em;
     margin-bottom: 20px;
 }
+
 .options {
     list-style-type: none;
     padding: 0;
 }
+
 .options li {
     margin-bottom: 10px;
 }
+
 .next-button {
     margin-top: 20px;
-    padding: 10px 20px;
-    font-size: 16px;
+    padding: 1em 2em;
+    font-size: 0.9em;
     cursor: pointer;
 }
+
 .result {
-    font-size: 18px;
+    font-size: 1em;
     margin-top: 20px;
     color: green;
 }
+
 .incorrect {
     color: red;
 }
 
-
 /* Dice Styles */
 .dice-container {
+    --dice-size: min(50vw, 300px);
+    --translateZ: calc(var(--dice-size) / 2);
     perspective: 800px;
     margin: 40px auto;
-    width: 200px;
-    height: 200px;
+    width: var(--dice-size);
+    height: var(--dice-size);
     position: relative;
 }
 
@@ -107,29 +146,104 @@ a {
 
 .face {
     position: absolute;
-    width: 200px;
-    height: 200px;
+    width: 100%;
+    height: 100%;
     opacity: 0.95;
     display: flex;
     align-items: center;
     justify-content: center;
     color: #fff;
-    font-size: 24px;
+    font-size: 4vw;
     font-weight: bold;
-    border: 2px solid #fff;
+    border: 0.5vw solid #fff;
     box-sizing: border-box;
 }
 
-.face.one   { background-color: #D02F37; transform: rotateY(  0deg) translateZ(100px); } /* ROUGE */
-.face.two   { background-color: #67B8CA; transform: rotateY( 90deg) translateZ(100px); } /* BLEU */
-.face.three { background-color: #4A9E4B; transform: rotateY(180deg) translateZ(100px); } /* VERT */
-.face.four  { background-color: #F9DE52; transform: rotateY(-90deg) translateZ(100px); } /* JAUNE */
-.face.five  { background-color: #E9B54F; transform: rotateX( 90deg) translateZ(100px); } /* ORANGE */
-.face.six   { background-color: #1F4986; transform: rotateX(-90deg) translateZ(100px); } /* BLEU FONCE */
+.face.one   { background-color: #D02F37; transform: rotateY(0deg) translateZ(var(--translateZ)); }
+.face.two   { background-color: #67B8CA; transform: rotateY(90deg) translateZ(var(--translateZ)); }
+.face.three { background-color: #4A9E4B; transform: rotateY(180deg) translateZ(var(--translateZ)); }
+.face.four  { background-color: #F9DE52; transform: rotateY(-90deg) translateZ(var(--translateZ)); }
+.face.five  { background-color: #E9B54F; transform: rotateX(90deg) translateZ(var(--translateZ)); }
+.face.six   { background-color: #1F4986; transform: rotateX(-90deg) translateZ(var(--translateZ)); }
 
 .roll-button {
     margin-top: 20px;
-    padding: 10px 20px;
-    font-size: 16px;
+    padding: 1em 2em;
+    /* font-size: 1em; */
     cursor: pointer;
+    max-width: 150px;
+}
+
+/* Dice Roll Container */
+.dice-roll-container {
+    display: flex;
+    align-items: center;
+}
+
+.roll-button {
+    margin-right: 20px;
+}
+
+/* Media Queries for Larger Screens */
+@media (min-width: 480px) {
+    body {
+        font-size: 14px;
+    }
+
+    h1 {
+        font-size: 1.5em;
+    }
+
+    .subject-container, .level-container {
+        flex-direction: row;
+        flex-wrap: wrap;
+        margin-top: 50px;
+    }
+
+    .subject, .level {
+        flex: 1 1 calc(50% - 40px);
+        max-width: calc(50% - 40px);
+        margin: 10px;
+        padding: 20px;
+        font-size: 1.2em;
+    }
+
+    .question {
+        font-size: 1.2em;
+    }
+
+    .next-button {
+        font-size: 0.9em;
+    }
+
+    .result {
+        font-size: 1em;
+    }
+}
+
+@media (min-width: 768px) {
+    body {
+        font-size: 16px;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+
+    .subject, .level {
+        flex: 1 1 calc(33.333% - 40px);
+        max-width: calc(33.333% - 40px);
+    }
+
+    .question {
+        font-size: 1.5em;
+    }
+
+    .next-button {
+        font-size: 1em;
+    }
+
+    .result {
+        font-size: 1.2em;
+    }
 }
