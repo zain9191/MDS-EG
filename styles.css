@@ -1,0 +1,135 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 20px; /* Added padding for the quiz page */
+}
+a {
+    text-decoration: none;
+}
+
+/* Subject Page Styles */
+.subject-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 50px;
+}
+.subject {
+    width: 150px;
+    height: 150px;
+    margin: 20px;
+    line-height: 150px;
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: transform 0.2s;
+}
+.subject:hover {
+    transform: scale(1.05);
+}
+/* Restart Game Button Styles */
+.restart-button {
+    margin-top: 30px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* Level Page Styles */
+.level-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
+}
+.level {
+    width: 150px;
+    height: 150px;
+    margin: 20px;
+    line-height: 150px;
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+/* Quiz Page Styles */
+.question-container {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: left;
+}
+.question {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+.options {
+    list-style-type: none;
+    padding: 0;
+}
+.options li {
+    margin-bottom: 10px;
+}
+.next-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+.result {
+    font-size: 18px;
+    margin-top: 20px;
+    color: green;
+}
+.incorrect {
+    color: red;
+}
+
+
+/* Dice Styles */
+.dice-container {
+    perspective: 800px;
+    margin: 40px auto;
+    width: 200px;
+    height: 200px;
+    position: relative;
+}
+
+.dice {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transform: rotateX(-30deg) rotateY(30deg);
+    transition: transform 1s ease-out;
+}
+
+.face {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    opacity: 0.95;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 24px;
+    font-weight: bold;
+    border: 2px solid #fff;
+    box-sizing: border-box;
+}
+
+.face.one   { background-color: #D02F37; transform: rotateY(  0deg) translateZ(100px); } /* ROUGE */
+.face.two   { background-color: #67B8CA; transform: rotateY( 90deg) translateZ(100px); } /* BLEU */
+.face.three { background-color: #4A9E4B; transform: rotateY(180deg) translateZ(100px); } /* VERT */
+.face.four  { background-color: #F9DE52; transform: rotateY(-90deg) translateZ(100px); } /* JAUNE */
+.face.five  { background-color: #E9B54F; transform: rotateX( 90deg) translateZ(100px); } /* ORANGE */
+.face.six   { background-color: #1F4986; transform: rotateX(-90deg) translateZ(100px); } /* BLEU FONCE */
+
+.roll-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}

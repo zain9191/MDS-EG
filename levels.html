@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Internet Usage Quiz - Levels</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <h1 id="subjectTitle">Select Difficulty Level</h1>
+
+    <div class="level-container">
+        <!-- Levels will be displayed here -->
+    </div>
+
+    <script>
+        // Get URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const subject = urlParams.get('subject');
+        const color = '#' + urlParams.get('color');
+
+        // Update the subject title
+        document.getElementById('subjectTitle').textContent = subject;
+
+        // Function to generate shades of the color
+        function getShades(hexColor) {
+            const shades = [];
+            let color = hexColor.replace('#', '');
+            for (let i = 0; i < 3; i++) {
+                let amt = i * 20;
+                let shadedColor = shadeColor(color, amt);
+                shades.push('#' + shadedColor);
+            }
+            return shades;
+        }
+
+        // Function to shade color
+        function shadeColor(color, percent) {
+            let num = parseInt(color,16),
+                amt = Math.round(2.55 * percent),
+                R = (num >> 16) + amt,
+                G = (num >> 8 & 0x00FF) + amt,
+                B = (num & 0x0000FF) + amt;
+            return (0x1000000 +
+                    (R<255?R<1?0:R:255)*0x10000 +
+                    (G<255?G<1?0:G:255)*0x100 +
+                    (B<255?B<1?0:B:255)).toString(16).slice(1);
+        }
+
+        // Create level buttons
+        const levels = ['Easy', 'Medium', 'Hard'];
+        const shades = getShades(color);
+
+        const levelContainer = document.querySelector('.level-container');
+
+        levels.forEach((level, index) => {
+            const levelLink = document.createElement('a');
+            levelLink.classList.add('level');
+            levelLink.style.backgroundColor = shades[index];
+            levelLink.textContent = level;
+            levelLink.href = `quiz.html?subject=${encodeURIComponent(subject)}&level=${level}`;
+            levelContainer.appendChild(levelLink);
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Internet Usage Quiz</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <h1 id="quizTitle">Quiz</h1>
+
+    <div class="question-container">
+        <div class="question" id="questionText"></div>
+        <ul class="options" id="optionsList"></ul>
+        <textarea id="answerField" rows="4" cols="50" style="display: none;"></textarea>
+        <button id="nextButton" class="next-button">Submit</button>
+        <div class="result" id="resultText"></div>
+    </div>
+
+    <!-- Include the quizData.js file -->
+    <script src="quizData.js"></script>
+
+    <script>
+        // Wait for the quizData to be loaded
+        window.onload = function() {
+            // Get URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const subject = urlParams.get('subject');
+            const level = urlParams.get('level');
+
+            document.getElementById('quizTitle').textContent = `${subject} - ${level} Level`;
+
+            // Access the quizData
+            let questions = quizData[subject][level];
+
+            // Retrieve asked questions from localStorage or initialize
+            let askedQuestionsKey = `${subject}_${level}_askedQuestions`;
+            let askedQuestions = JSON.parse(localStorage.getItem(askedQuestionsKey)) || [];
+
+            // Filter out asked questions
+            let remainingQuestions = questions.filter((q, index) => !askedQuestions.includes(index));
+
+            // If all questions have been asked, reset askedQuestions
+            if (remainingQuestions.length === 0) {
+                // All questions have been asked
+                alert('You have answered all questions for this subject and level. The questions will now reset.');
+                askedQuestions = [];
+                remainingQuestions = questions.slice();
+            }
+
+            // Select a random question from remaining questions
+            let randomIndex = Math.floor(Math.random() * remainingQuestions.length);
+            let questionObj = remainingQuestions[randomIndex];
+            let currentQuestionIndex = questions.indexOf(questionObj);
+
+            function showQuestion() {
+                document.getElementById('questionText').textContent = questionObj.question;
+
+                const optionsList = document.getElementById('optionsList');
+                optionsList.innerHTML = '';
+                document.getElementById('answerField').style.display = 'none';
+                document.getElementById('answerField').value = '';
+                document.getElementById('resultText').textContent = '';
+
+                if (questionObj.type === 'multiple-choice' || questionObj.type === 'true-false') {
+                    const options = questionObj.type === 'multiple-choice' ? questionObj.options : ['True', 'False'];
+                    options.forEach(option => {
+                        const optionItem = document.createElement('li');
+                        const optionInput = document.createElement('input');
+                        optionInput.type = 'radio';
+                        optionInput.name = 'option';
+                        optionInput.value = option;
+                        optionItem.appendChild(optionInput);
+                        optionItem.appendChild(document.createTextNode(' ' + option));
+                        optionsList.appendChild(optionItem);
+                    });
+                } else if (questionObj.type === 'open-ended') {
+                    document.getElementById('answerField').style.display = 'block';
+                }
+
+                // Update Next button text
+                document.getElementById('nextButton').textContent = 'Submit';
+            }
+
+            document.getElementById('nextButton').addEventListener('click', function handleNextButton() {
+                let selectedAnswer;
+
+                // Check if answer is provided
+                if (questionObj.type === 'multiple-choice' || questionObj.type === 'true-false') {
+                    const options = document.getElementsByName('option');
+                    for (const option of options) {
+                        if (option.checked) {
+                            selectedAnswer = option.value;
+                            break;
+                        }
+                    }
+                    if (!selectedAnswer) {
+                        alert('Please select an answer before proceeding.');
+                        return;
+                    }
+                } else if (questionObj.type === 'open-ended') {
+                    selectedAnswer = document.getElementById('answerField').value.trim();
+                    if (!selectedAnswer) {
+                        alert('Please enter your answer before proceeding.');
+                        return;
+                    }
+                }
+
+                // Disable inputs
+                disableInputs();
+
+                // Check the answer and provide feedback
+                const resultText = document.getElementById('resultText');
+                if (questionObj.type === 'open-ended') {
+                    resultText.textContent = `Your answer: ${selectedAnswer}\nExpected answer: ${questionObj.answer}`;
+                    resultText.classList.remove('incorrect');
+                } else if (selectedAnswer === questionObj.answer) {
+                    resultText.textContent = 'Correct!';
+                    resultText.classList.remove('incorrect');
+                } else {
+                    resultText.textContent = `Incorrect. The correct answer is: ${questionObj.answer}`;
+                    resultText.classList.add('incorrect');
+                }
+
+                // Add the current question index to askedQuestions
+                if (!askedQuestions.includes(currentQuestionIndex)) {
+                    askedQuestions.push(currentQuestionIndex);
+                    localStorage.setItem(askedQuestionsKey, JSON.stringify(askedQuestions));
+                }
+
+                // Change Next button to say 'Finish'
+                document.getElementById('nextButton').textContent = 'Finish';
+
+                // Update event listener to redirect to index.html
+                document.getElementById('nextButton').removeEventListener('click', handleNextButton);
+                document.getElementById('nextButton').addEventListener('click', function finishQuiz() {
+                    // Redirect to index.html
+                    window.location.href = 'index.html';
+                });
+            });
+
+            function disableInputs() {
+                const options = document.getElementsByName('option');
+                options.forEach(option => option.disabled = true);
+                document.getElementById('answerField').disabled = true;
+            }
+
+            // Start the quiz
+            showQuestion();
+        };
+    </script>
+
+</body>
+</html>
