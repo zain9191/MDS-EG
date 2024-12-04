@@ -23,7 +23,7 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 3em;
+    font-size: 6em;
     width: fit-content;
     padding: 25px;
     border-radius: 35px;
@@ -31,26 +31,45 @@ h1 {
 }
 
 
-/* Container Styles */
-.subject-container,
+
 .level-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin: 60px ;
+    font-size: 5rem;
+    height: 40vh;
+
+}
+.subject-container
+ {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 15px;
     margin: 20px auto;
+    height: 100%;
+    flex-wrap: wrap;
 }
-/* @media (max-width: 768px) { 
-    .subject-container {
-        flex-direction: column;
-    }
-} */
-.subject,
+.subject-container
+{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, auto);
+    /* gap: 15px;
+    margin: 20px auto;
+    height: 100%; */
+}
+
+
+
 .level {
-    width: 40%;
+    width: 60%;
     padding: 15px;
-    font-size: larger;
+    font-size: 5rem;
     border: 1px solid #ddd;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     background-color: #f9f9f9;
@@ -58,8 +77,26 @@ h1 {
     cursor: pointer;
     border-radius: 10px;
     transition: transform 0.2s;
-}
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 
+}
+.subject{
+    /* width: 40%; */
+    padding: 15px;
+    font-size: 2.5rem;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+    color: #000;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: transform 0.2s;
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
 .subject:hover,
 .level:hover {
     transform: scale(1.02);
@@ -68,37 +105,43 @@ h1 {
 /* Button Styles */
 /* .restart-button, */
 .next-button {
-    margin-top: 20px;
-    padding: 10px 20px;
-    font-size: 1em;
+    margin-top: 80px;
+    padding:  50px;
+    font-size: 4em;
     cursor: pointer;
-    max-width: 100px;
+    /* max-width: 100px; */
     text-align: center;
+    font-family: 'Winter Lemon', Arial, sans-serif;
+    border-radius: 35px;
+    background-color: #de833d
+    ;
 }
 
 /* Question Container Styles */
 .question-container {
-    max-width: 600px;
+    width: 80%;
+    height: fit-content;
     margin: 0 auto;
     text-align: left;
-    padding: 20px;
+    padding: 20px 40px;
     background-color: #FFFFFF80;
     border-radius: 10px;
 }
 
 .question {
-    font-size: 1.2em;
+    font-size: 3rem;
     margin-bottom: 20px;
 }
 
 .options {
     list-style-type: none;
-    padding: 0;
+    padding: 80;
+    font-size: 2.8rem;
 }
 
 .options li {
-    margin-bottom: 10px;
-    font-size: 1em;
+    margin-bottom: 100px;
+    font-size: 3rem;
 }
 
 .result {
@@ -116,7 +159,7 @@ h1 {
 
 /* Dice Styles */
 .dice-container {
-    --dice-size: min(50vw, 300px);
+    --dice-size: min(50vw, 450px);
     --translateZ: calc(var(--dice-size) / 2);
     perspective: 800px;
     margin: 40px auto;
@@ -178,7 +221,7 @@ h1 {
 }
 
 .main-container {
-    max-height: fit-content;
+    /* height: 95vh; */
     margin-top: 5vh;
     background-color: #4774C0;
     border-radius: 35px;
@@ -192,7 +235,8 @@ h1 {
     
 
 .dice-and-categories {
-padding: 25px;    
+padding: 25px;  
+/* height: fit-content;   */
 }
 
 @media (max-width: 768px) { 
@@ -212,12 +256,14 @@ padding: 25px;
     background-color: #364e87;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     padding: 20px;
+    height: 40vh;
  }
 
 .dice-roll-container {
 
     border-radius: 35px;
     padding: 20px;
+    height: 40vh;
 
 }
 .restart-button {
@@ -232,4 +278,14 @@ padding: 25px;
     border: none; /* Remove default button styles */
     cursor: pointer; /* Pointer cursor for clickable effect */
     z-index: 1000; /* Ensures it appears above other elements */
+}
+
+
+.resultText{
+    font-size: 2.2rem;
+    /* border: dotted red 10px; */
+}
+.radio{
+    height: 50px;
+    width: 50px;
 }

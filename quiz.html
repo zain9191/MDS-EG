@@ -11,12 +11,10 @@
     <div class="question-container">
         <p class="question" id="questionText">Question will appear here</p>
         <ul class="options" id="optionsList">
-            <!-- Options will be populated here -->
-        </ul>
-        <!-- Answer field for open-ended questions -->
-        <input type="text" id="answerField" style="display:none;" placeholder="Type your answer here">
+         </ul>
+         <input type="text" id="answerField" style="display:none;" placeholder="Type your answer here">
         <!-- Result Text -->
-        <p id="resultText"></p>
+        <p id="resultText" class="resultText"></p>
     </div>
 
     <button class="next-button" id="nextButton">Next</button>
@@ -82,6 +80,7 @@
                         optionInput.type = 'radio';
                         optionInput.name = 'option';
                         optionInput.value = option;
+                        optionInput.className = "radio";
 
                         optionLabel.appendChild(optionInput);
                         optionLabel.appendChild(document.createTextNode(' ' + option));

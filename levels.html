@@ -23,15 +23,17 @@
 
         // Function to generate shades of the color
         function getShades(hexColor) {
-            const shades = [];
-            let color = hexColor.replace('#', '');
-            for (let i = 0; i < 3; i++) {
-                let amt = i * 20;
-                let shadedColor = shadeColor(color, amt);
-                shades.push('#' + shadedColor);
-            }
-            return shades;
-        }
+    const shades = [];
+    let color = hexColor.replace('#', '');
+    for (let i = 0; i < 3; i++) {
+        let amt = i * 20;
+        let shadedColor = shadeColor(color, amt);
+        shades.push('#' + shadedColor);
+    }
+    // Reverse the shades array
+    return shades.reverse();
+}
+
 
         // Function to shade color
         function shadeColor(color, percent) {
