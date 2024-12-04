@@ -178,7 +178,7 @@ h1 {
 }
 
 .main-container {
-    /* max-height: 90vh; */
+    max-height: fit-content;
     margin-top: 5vh;
     background-color: #4774C0;
     border-radius: 35px;
