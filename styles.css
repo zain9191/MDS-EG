@@ -8,6 +8,7 @@ body {
     margin: 0;
     font-size: 12px;
     background-color: #67B8CA;
+    height: 100vh;
 }
 
 a {
@@ -34,17 +35,17 @@ h1 {
 .subject-container,
 .level-container {
     display: flex;
-    /* flex-direction: column; */
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 15px;
     margin: 20px auto;
 }
-@media (max-width: 768px) { /* Adjust max-width as needed for your definition of small screens */
+/* @media (max-width: 768px) { 
     .subject-container {
         flex-direction: column;
     }
-}
+} */
 .subject,
 .level {
     width: 40%;
