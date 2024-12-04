@@ -1,18 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Winter+Lemon&display=swap');
 
-
 /* General Styles */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Winter Lemon', Arial, sans-serif;
     text-align: center;
     padding: 20px;
     margin: 0;
     font-size: 12px;
-    background-image: url('mobilebg.png'); /* Apply mobile background image */
-    background-size: cover;
-    background-position: center;
-    font-family: 'Winter Lemon';
-
+    background-color: #67B8CA;
 }
 
 a {
@@ -20,77 +15,74 @@ a {
 }
 
 h1 {
-    font-size: 1.2em;
+    font-family: 'Winter Lemon';
+    text-align: center;
+    margin: 20px auto; /* Centers horizontally */
+    background-color: #FFFFFF80;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3em;
+    width: fit-content;
+    padding: 25px;
+    border-radius: 35px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
-/* Subject Page Styles */
-.subject-container {
+
+/* Container Styles */
+.subject-container,
+.level-container {
     display: flex;
-    flex-direction: column; 
-    align-items: center; 
+    /* flex-direction: column; */
+    align-items: center;
     justify-content: center;
-    gap: 15px; 
+    gap: 15px;
     margin: 20px auto;
 }
-
-.subject {
-    width: 90%; /* Slightly reduce width for better spacing */
+@media (max-width: 768px) { /* Adjust max-width as needed for your definition of small screens */
+    .subject-container {
+        flex-direction: column;
+    }
+}
+.subject,
+.level {
+    width: 40%;
     padding: 15px;
-    font-size: 1em;
-    border: 1px solid #ddd; /* Subtle border for structure */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Adds a shadow for depth */
-    background-color: #f9f9f9; /* Light background for readability */
-    color: #333; /* Adjusted text color for better contrast */
+    font-size: larger;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+    color: #000;
     cursor: pointer;
     border-radius: 10px;
     transition: transform 0.2s;
 }
 
-.subject:hover {
-    transform: scale(1.02);
-}
-
-/* Level Page Styles */
-.level-container {
-    display: flex;
-    flex-direction: column; 
-    align-items: center; 
-    justify-content: center;
-    gap: 15px; 
-    margin: 20px auto;
-}
-
-.level {
-    width: 90%;
-    padding: 15px;
-    font-size: 1em;
-    border: 1px solid #ddd;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    background-color: #f9f9f9;
-    color: #333;
-    cursor: pointer;
-    border-radius: 10px;
-}
-
+.subject:hover,
 .level:hover {
     transform: scale(1.02);
 }
 
-/* Restart Game Button Styles */
-.restart-button {
-    margin-top: 30px;
-    padding: 1em 2em;
+/* Button Styles */
+/* .restart-button, */
+.next-button {
+    margin-top: 20px;
+    padding: 10px 20px;
     font-size: 1em;
     cursor: pointer;
-    max-width: 150px;
+    max-width: 100px;
+    text-align: center;
 }
 
-/* Quiz Page Styles */
+/* Question Container Styles */
 .question-container {
     max-width: 600px;
     margin: 0 auto;
     text-align: left;
     padding: 20px;
+    background-color: #FFFFFF80;
+    border-radius: 10px;
 }
 
 .question {
@@ -105,22 +97,19 @@ h1 {
 
 .options li {
     margin-bottom: 10px;
-}
-
-.next-button {
-    margin-top: 20px;
-    padding: 1em 2em;
-    font-size: 0.9em;
-    cursor: pointer;
+    font-size: 1em;
 }
 
 .result {
     font-size: 1em;
     margin-top: 20px;
+}
+
+.result.correct {
     color: green;
 }
 
-.incorrect {
+.result.incorrect {
     color: red;
 }
 
@@ -133,6 +122,7 @@ h1 {
     width: var(--dice-size);
     height: var(--dice-size);
     position: relative;
+    
 }
 
 .dice {
@@ -167,83 +157,78 @@ h1 {
 .face.six   { background-color: #1F4986; transform: rotateX(-90deg) translateZ(var(--translateZ)); }
 
 .roll-button {
-    margin-top: 20px;
-    padding: 1em 2em;
-    /* font-size: 1em; */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
     cursor: pointer;
-    max-width: 150px;
+    padding: 15px 30px;
+    font-size: 2.5em;
+    font-weight: bold;
+    text-align: center;
+    color: #ffffff;
+    background-color: rgba(0, 0, 0, 0.5); /* Black with 50% transparency */
+    border: none;
+    border-radius: 50px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+    
 }
 
-/* Dice Roll Container */
+.main-container {
+    /* max-height: 90vh; */
+    margin-top: 5vh;
+    background-color: #4774C0;
+    border-radius: 35px;
+        background-image: url('mobilebg.png');
+    background-size: cover;
+    background-position: center;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    padding-top: 20px;    
+}
+
+    
+
+.dice-and-categories {
+padding: 25px;    
+}
+
+@media (max-width: 768px) { 
+    .dice-and-categories {
+        flex-direction: column !important;
+        align-items: center; /* Center-align items in column layout */
+        gap: 20px; /* Add spacing between items */    }
+}
+
+
+
+.categories-container {
+    /* width: 60%; */
+    margin: 20px;
+    border-radius: 35px;
+    padding: 20px 0px;
+    background-color: #364e87;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    padding: 20px;
+ }
+
 .dice-roll-container {
-    display: flex;
-    align-items: center;
+
+    border-radius: 35px;
+    padding: 20px;
+
 }
-
-.roll-button {
-    margin-right: 20px;
-}
-
-/* Media Queries for Larger Screens */
-@media (min-width: 480px) {
-    body {
-        font-size: 14px;
-    }
-
-    h1 {
-        font-size: 1.5em;
-    }
-
-    .subject-container, .level-container {
-        flex-direction: row;
-        flex-wrap: wrap;
-        margin-top: 50px;
-    }
-
-    .subject, .level {
-        flex: 1 1 calc(50% - 40px);
-        max-width: calc(50% - 40px);
-        margin: 10px;
-        padding: 20px;
-        font-size: 1.2em;
-    }
-
-    .question {
-        font-size: 1.2em;
-    }
-
-    .next-button {
-        font-size: 0.9em;
-    }
-
-    .result {
-        font-size: 1em;
-    }
-}
-
-@media (min-width: 768px) {
-    body {
-        font-size: 16px;
-    }
-
-    h1 {
-        font-size: 2em;
-    }
-
-    .subject, .level {
-        flex: 1 1 calc(33.333% - 40px);
-        max-width: calc(33.333% - 40px);
-    }
-
-    .question {
-        font-size: 1.5em;
-    }
-
-    .next-button {
-        font-size: 1em;
-    }
-
-    .result {
-        font-size: 1.2em;
-    }
+.restart-button {
+    position: fixed; /* Keeps it in a fixed position relative to the viewport */
+    bottom: 20px; /* Distance from the bottom of the page */
+    right: 20px; /* Distance from the right of the page */
+    width: 50px; /* Thumbnail size */
+    height: 50px; /* Thumbnail size */
+    background-image: url('path-to-thumbnail-image.png'); /* Replace with your image path */
+    background-size: cover; /* Ensure the image scales properly */
+    background-position: center; /* Center the image */
+    border: none; /* Remove default button styles */
+    cursor: pointer; /* Pointer cursor for clickable effect */
+    z-index: 1000; /* Ensures it appears above other elements */
 }

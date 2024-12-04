@@ -3,52 +3,45 @@
 <head>
     <title>Internet Usage Quiz - Subjects</title>
     <link rel="stylesheet" href="styles.css">
-
 </head>
 <body>
+    <div class="main-container">
+        <h1>CTRL Master</h1>
+        
+        <!-- Inner Containers -->
+        <div class="dice-and-categories">
+            <!-- First Div: Dice and Button -->
+            <div class="dice-roll-container">
+                <div class="dice-container">
+                    <button class="roll-button" id="rollButton" style="cursor: pointer;">Roll Me!</button>
+                    <div class="dice" id="dice">
+                        <div class="face one"></div>
+                        <div class="face two"></div>
+                        <div class="face three"></div>
+                        <div class="face four"></div>
+                        <div class="face five"></div>
+                        <div class="face six"></div>
+                    </div>
+                </div>
+            </div>
 
-    <h1>Roll the dice</h1>
-
-    <!-- Dice and Roll Button Container -->
-    <div class="dice-roll-container">
-        <!-- Roll Dice Button -->
-         
-        <!-- <button class="roll-button" id="rollButton">Roll Dice</button> -->
-
-
-        <!-- Dice Container -->
-        <div class="dice-container">
-            <div class="dice" id="dice">
-                <!-- Each face of the dice -->
-                <div class="face one"></div>
-                <div class="face two"></div>
-                <div class="face three"></div>
-                <div class="face four"></div>
-                <div class="face five"></div>
-                <div class="face six"></div>
+            <!-- Second Div: Categories Section -->
+            <div class="categories-container">
+                <!-- <h2>Select a Subject</h2> -->
+                <div class="subject-container">
+                    <a href="levels.html?subject=Social%20Media%20Usage&color=D02F37" class="subject" style="background-color: #D02F37;">Social Media Usage</a>
+                    <a href="levels.html?subject=Ethics%20and%20Safety&color=67B8CA" class="subject" style="background-color: #67B8CA;">Ethics and Safety</a>
+                    <a href="levels.html?subject=Cybersecurity&color=4A9E4B" class="subject" style="background-color: #4A9E4B;">Cybersecurity</a>
+                    <a href="levels.html?subject=Search%20Engines&color=F9DE52" class="subject" style="background-color: #F9DE52;">Search Engines</a>
+                    <a href="levels.html?subject=Digital%20Tools&color=E9B54F" class="subject" style="background-color: #E9B54F;">Digital Tools</a>
+                    <a href="levels.html?subject=Content%20Creation&color=1F4986" class="subject" style="background-color: #1F4986;">Content Creation</a>
+                </div>
             </div>
         </div>
-    </div>
 
-    <!-- Subject Links -->
-     <div>
-        <img src="dice.png" alt="Roll Dice" class="roll-button" id="rollButton" style="cursor: pointer;">
+        <!-- Restart Game Button -->
         <img src="restart.png" alt="Restart Game" class="restart-button" onclick="restartGame()" style="cursor: pointer;">
-
-
-     </div>
-    <div class="subject-container">
-        <a href="levels.html?subject=Social%20Media%20Usage&color=D02F37" class="subject" style="background-color: #D02F37;">Social Media Usage</a>
-        <a href="levels.html?subject=Ethics%20and%20Safety&color=67B8CA" class="subject" style="background-color: #67B8CA;">Ethics and Safety</a>
-        <a href="levels.html?subject=Cybersecurity&color=4A9E4B" class="subject" style="background-color: #4A9E4B;">Cybersecurity</a>
-        <a href="levels.html?subject=Search%20Engines&color=F9DE52" class="subject" style="background-color: #F9DE52;">Search Engines</a>
-        <a href="levels.html?subject=Digital%20Tools&color=E9B54F" class="subject" style="background-color: #E9B54F;">Digital Tools</a>
-        <a href="levels.html?subject=Content%20Creation&color=1F4986" class="subject" style="background-color: #1F4986;">Content Creation</a>
-        
     </div>
-
-    <!-- Restart Game Button -->
-    <!-- <button class="restart-button" onclick="restartGame()">Restart Game</button> -->
 
     <!-- Include JavaScript file -->
     <script src="dice.js"></script>
@@ -59,6 +52,5 @@
             alert('Game has been restarted. All questions are now available again.');
         }
     </script>
-
 </body>
 </html>
